@@ -3,6 +3,14 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 
 const path = require('path')
+const os = require('os')
+let needHost = ''
+try {
+    let network = os.networkInterfaces(); // 获得网络接口列表。
+    needHost = network[Object.keys(network)[0]][1].address // 本机ip
+} catch (e) {
+    needHost = 'localhost'
+}
 
 module.exports = {
     dev: {
@@ -13,7 +21,7 @@ module.exports = {
         proxyTable: {},
 
         // Various Dev Server settings
-        host: 'localhost', // can be overwritten by process.env.HOST
+        host: needHost, // can be overwritten by process.env.HOST
         port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
         autoOpenBrowser: true,
         errorOverlay: true,
