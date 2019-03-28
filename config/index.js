@@ -18,8 +18,17 @@ module.exports = {
         // Paths
         assetsSubDirectory: 'static',
         assetsPublicPath: '/',
-        proxyTable: {},
-
+        proxyTable: {
+            '/api': {
+                target: 'https://www.easy-mock.com/mock/5c7fb3fc6498b753ed1f9cd2',//目标接口域名
+                secure: true, // 如果是https接口，需要配置这个参数
+                changeOrigin: true,//是否跨域
+                pathRewrite: {
+                    // '^/api': ''
+                }
+                //重写路径，其实这里就是和上面的target拼接起来
+            }
+        },
         // Various Dev Server settings
         host: needHost, // can be overwritten by process.env.HOST
         port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
