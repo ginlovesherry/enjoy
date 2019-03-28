@@ -17,3 +17,6 @@
 # Denote all files that are truly binary and should not be modified.
 *.png binary
 *.jpg binary
+
+package.json text eol=lf
+package-lock.json text eol=lf
