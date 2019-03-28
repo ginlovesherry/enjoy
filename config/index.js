@@ -26,7 +26,7 @@ module.exports = {
                 pathRewrite: {
                     // '^/api': ''
                 }
-                //重写路径，其实这里就是和上面的target拼接起来
+                //重写路径，其实这里就是和上面的target拼接起来P
             }
         },
         // Various Dev Server settings

@@ -37,6 +37,9 @@ module.exports = {
         //空行最多不能超过100行
         "no-multiple-empty-lines": [0, { "max": 100 }],
         "indent": [2, 4], //缩进风格
+        "vue/script-indent": [2, 4, {
+            baseIndent: 1
+        }],
         //关闭禁止混用tab和空格
         "no-mixed-spaces-and-tabs": [0],
         // 关闭语句强制分号结尾
@@ -51,5 +54,11 @@ module.exports = {
         'space-before-function-paren': [0, 'always'], //函数定义时括号前面要不要有空格
         'no-console': 0, // 禁止使用console
         'no-unused-expressions': 0, //禁止无用的表达式
-    }
+    },
+    "overrides": [{
+        "files": ["*.vue"],
+        "rules": {
+            "indent": 0
+        }
+    }]
 }
