@@ -3,6 +3,9 @@ const path = require('path')
 const utils = require('./utils')
 const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
+const HappyPack = require('happypack')
+const os = require('os')
+const happyThreadPool = HappyPack.ThreadPool({size: os.cpus().length})
 
 function resolve(dir) {
     return path.join(__dirname, '..', dir)
@@ -31,7 +34,7 @@ module.exports = {
             config.build.assetsPublicPath : config.dev.assetsPublicPath
     },
     resolve: {
-        extensions: ['.js', '.vue', '.json'],
+        extensions: ['.js', '.vue', '.json', '.scss'],
         alias: {
             'vue$': 'vue/dist/vue.esm.js',
             '@': resolve('src'),
@@ -47,8 +50,9 @@ module.exports = {
             },
             {
                 test: /\.js$/,
-                loader: 'babel-loader',
-                include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-server/client')]
+                loader: 'happypack/loader?id=happybabel',
+                include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-server/client')],
+                exclude: /(node_modules|bower_components)/
             },
             {
                 test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
@@ -76,6 +80,13 @@ module.exports = {
             }
         ]
     },
+    plugins: [
+        new HappyPack({
+            id: 'happybabel',
+            loaders: ['babel-loader?cacheDirectory'],
+            threadPool: happyThreadPool
+        }),
+    ],
     node: {
         // prevent webpack from injecting useless setImmediate polyfill because Vue
         // source contains it (although only uses it if it's native).

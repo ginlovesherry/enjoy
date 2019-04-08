@@ -26,7 +26,7 @@ module.exports = {
                 pathRewrite: {
                     // '^/api': ''
                 }
-                //重写路径，其实这里就是和上面的target拼接起来P
+                //重写路径，其实这里就是和上面的target拼接起来
             }
         },
         // Various Dev Server settings
@@ -73,7 +73,7 @@ module.exports = {
          * Source Maps
          */
 
-        productionSourceMap: true,
+        productionSourceMap: false,
         // https://webpack.js.org/configuration/devtool/#production
         devtool: '#source-map',
 

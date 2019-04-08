@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import 'lib-flexible'; // 移动端适配
 
 Vue.config.productionTip = false
 

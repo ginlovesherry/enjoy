@@ -21,6 +21,15 @@ exports.cssLoaders = function(options) {
             sourceMap: options.sourceMap
         }
     }
+    // 直接写 px ，编译后会直接转化成rem —— 除开下面两种情况，其他长度用这个
+    // 在 px 后面添加 /*no*/ ，不会转化 px，会原样输出。 —— 一般border需用这个
+    // 在 px 后面添加 /*px*/ ，会根据 dpr 的不同，生成三套代码。—— 一般字体需用这个
+    const px2remLoader = {
+        loader: 'px2rem-loader',
+        options: {
+          emUnit: 75 // 设计稿的1/10
+        }
+    }
 
     const postcssLoader = {
         loader: 'postcss-loader',
@@ -31,7 +40,7 @@ exports.cssLoaders = function(options) {
 
     // generate loader string to be used with extract text plugin
     function generateLoaders(loader, loaderOptions) {
-        const loaders = options.usePostCSS ? [cssLoader, postcssLoader] : [cssLoader]
+        const loaders = options.usePostCSS ? [cssLoader, postcssLoader, px2remLoader] : [cssLoader, px2remLoader]
 
         if (loader) {
             loaders.push({
