@@ -3,6 +3,9 @@ const path = require('path')
 const config = require('../config')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const packageConfig = require('../package.json')
+const HappyPack = require('happypack')
+const os = require('os')
+const happyThreadPool = HappyPack.ThreadPool({size: os.cpus().length})
 
 exports.assetsPath = function(_path) {
     const assetsSubDirectory = process.env.NODE_ENV === 'production' ?
@@ -84,11 +87,29 @@ exports.styleLoaders = function(options) {
         const loader = loaders[extension]
         output.push({
             test: new RegExp('\\.' + extension + '$'),
-            use: loader
+            use: 'happypack/loader?id=happycss' + extension
         })
     }
 
     return output
+}
+
+exports.happypack = function(options) {
+    const happy = []
+    const loaders = exports.cssLoaders(options)
+
+    for (const extension in loaders) {
+        const loader = loaders[extension]
+        happy.push(
+            new HappyPack({
+                id: 'happycss' + extension,
+                loaders: loader,
+                threadPool: happyThreadPool
+            })
+        )
+    }
+
+    return happy
 }
 
 exports.createNotifierCallback = () => {

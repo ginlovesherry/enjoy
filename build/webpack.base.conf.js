@@ -85,7 +85,7 @@ module.exports = {
             id: 'happybabel',
             loaders: ['babel-loader?cacheDirectory'],
             threadPool: happyThreadPool
-        }),
+        })
     ],
     node: {
         // prevent webpack from injecting useless setImmediate polyfill because Vue
