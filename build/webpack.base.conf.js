@@ -1,5 +1,6 @@
 'use strict'
 const path = require('path')
+const webpack = require('webpack')
 const utils = require('./utils')
 const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
@@ -85,6 +86,10 @@ module.exports = {
             id: 'happybabel',
             loaders: ['babel-loader?cacheDirectory'],
             threadPool: happyThreadPool
+        }),
+        new webpack.DllReferencePlugin({
+            context: path.resolve(__dirname, '..'),
+            manifest: require('../static/mainfest.json')
         })
     ],
     node: {
