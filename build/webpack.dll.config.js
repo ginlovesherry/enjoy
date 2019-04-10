@@ -1,5 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
+const AssetsPlugin = require('assets-webpack-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 module.exports = {
     entry: {
@@ -7,9 +9,9 @@ module.exports = {
     },
 
     output: {
-        path: path.resolve(__dirname, '..', './static'),
-        filename: '[name].dll.js',
-        library: '[name]_library',
+        path: path.resolve(__dirname, '..', './static/js'),
+        filename: '[name].dll.[chunkhash:8].js',
+        library: '[name]_[chunkhash:8]',
     },
 
     plugins: [
@@ -33,10 +35,15 @@ module.exports = {
                 reduce_vars: true,
             }
         }),
-        new webpack.DllPlugin({
-            path: path.resolve(__dirname, '..', './static/mainfest.json'),
-            name: '[name]_library',
-            context: path.resolve(__dirname, '..') // 执行的上下文环境，对之后DllReferencePlugin有用
+        new AssetsPlugin({  //
+            filename: './json/bundle-conf.json',
+            path: path.resolve(__dirname, '..')
         }),
+        new webpack.DllPlugin({
+            path: path.resolve(__dirname, '..', './json/mainfest.json'),
+            name: '[name]_[chunkhash:8]',
+            context: __dirname // 执行的上下文环境，对之后DllReferencePlugin有用
+        }),
+        new CleanWebpackPlugin()
     ]
 };

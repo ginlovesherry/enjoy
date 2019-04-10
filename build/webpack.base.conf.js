@@ -88,8 +88,8 @@ module.exports = {
             threadPool: happyThreadPool
         }),
         new webpack.DllReferencePlugin({
-            context: path.resolve(__dirname, '..'),
-            manifest: require('../static/mainfest.json')
+            context: __dirname,
+            manifest: require('../json/mainfest.json')
         })
     ],
     node: {

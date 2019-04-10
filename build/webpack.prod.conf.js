@@ -10,6 +10,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const bundleConfig = require('../json/bundle-conf.json')
 
 const env = process.env.NODE_ENV === 'testing' ?
     require('../config/test.env') :
@@ -38,18 +39,22 @@ const webpackConfig = merge(baseWebpackConfig, {
         new UglifyJsPlugin({
             uglifyOptions: {
                 compress: {
-                    warnings: false
+                    warnings: false,
+                    drop_console: true,
+                    collapse_vars: true,
+                    reduce_vars: true,
                 }
             },
             sourceMap: config.build.productionSourceMap,
-            parallel: true
+            parallel: true,
+            cache: true
         }),
         // extract css into its own file
         new ExtractTextPlugin({
             filename: utils.assetsPath('css/[name].[contenthash:8].css'),
             // Setting the following option to `false` will not extract CSS from codesplit chunks.
             // Their CSS will instead be inserted dynamically with style-loader when the codesplit chunk has been loaded by webpack.
-            // It's currently set to `true` because we are seeing that sourcemaps are included in the codesplit bundle as well when it's `false`, 
+            // It's currently set to `true` because we are seeing that sourcemaps are included in the codesplit bundle as well when it's `false`,
             // increasing file size: https://github.com/vuejs-templates/webpack/issues/1110
             allChunks: true,
         }),
@@ -66,6 +71,8 @@ const webpackConfig = merge(baseWebpackConfig, {
                 'index.html' : config.build.index,
             template: 'index.html',
             inject: true,
+            title: '悦享',
+            bundleName: `./static/js/${bundleConfig.vendor.js}`,
             minify: {
                 removeComments: true,
                 collapseWhitespace: true,

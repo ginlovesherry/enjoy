@@ -13,7 +13,7 @@
         <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
         <meta http-equiv="Pragma" content="no-cache">
         <meta http-equiv="Expires" content="0">
-        <title>enjoy</title>
+        <title><%= htmlWebpackPlugin.options.title %></title>
         <meta name="description" content=" ">
         <meta name="keywords" content="">
     </head>
@@ -21,7 +21,7 @@
     <body>
         <div id="app"></div>
         <!-- built files will be auto injected -->
-        <script src="./static/vendor.dll.js"></script>
+        <script src="<%= htmlWebpackPlugin.options.bundleName %>"></script>
     </body>
 
 </html>
