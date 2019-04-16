@@ -5,7 +5,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 module.exports = {
     entry: {
-        vendor: ['vue/dist/vue.esm.js', 'vue-router', 'vuex', 'axios', 'vue-axios', 'vant'],
+        vendor: ['vue/dist/vue.esm.js', 'vue-router', 'vuex', 'axios', 'vue-axios'],
     },
 
     output: {
