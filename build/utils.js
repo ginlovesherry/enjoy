@@ -5,7 +5,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const packageConfig = require('../package.json')
 const HappyPack = require('happypack')
 const os = require('os')
-const happyThreadPool = HappyPack.ThreadPool({size: os.cpus().length})
+const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length })
 
 exports.assetsPath = function(_path) {
     const assetsSubDirectory = process.env.NODE_ENV === 'production' ?
@@ -30,7 +30,7 @@ exports.cssLoaders = function(options) {
     const px2remLoader = {
         loader: 'px2rem-loader',
         options: {
-          emUnit: 75 // 设计稿的1/10
+            emUnit: 75 // 设计稿的1/10
         }
     }
 
@@ -42,7 +42,7 @@ exports.cssLoaders = function(options) {
     }
 
     // generate loader string to be used with extract text plugin
-    function generateLoaders(loader, loaderOptions) {
+    function generateLoaders(happyId, loader, loaderOptions) {
         const loaders = options.usePostCSS ? [cssLoader, postcssLoader, px2remLoader] : [cssLoader, px2remLoader]
 
         if (loader) {
@@ -57,39 +57,83 @@ exports.cssLoaders = function(options) {
         // Extract CSS when that option is specified
         // (which is the case during production build)
         if (options.extract) {
-            return ExtractTextPlugin.extract({
-                use: loaders,
-                fallback: 'vue-style-loader',
-                publicPath: '../../'
-            })
+            return {
+                extract: ExtractTextPlugin.extract({
+                    use: 'happypack/loader?id=happycss' + happyId,
+                    fallback: 'vue-style-loader',
+                    publicPath: '../../'
+                }),
+                loaders: loaders
+            }
         } else {
-            return ['vue-style-loader'].concat(loaders)
+            return {
+                loaders: ['vue-style-loader'].concat(loaders)
+            }
         }
     }
 
     // https://vue-loader.vuejs.org/en/configurations/extract-css.html
-    return {
-        css: generateLoaders(),
-        postcss: generateLoaders(),
-        less: generateLoaders('less'),
-        sass: generateLoaders('sass', { indentedSyntax: true }),
-        scss: generateLoaders('sass'),
-        stylus: generateLoaders('stylus'),
-        styl: generateLoaders('stylus')
+    if (options.extract) {
+        return {
+            extract: {
+                css: generateLoaders('css').extract,
+                postcss: generateLoaders('postcss').extract,
+                less: generateLoaders('less', 'less').extract,
+                sass: generateLoaders('sass', 'sass', { indentedSyntax: true }).extract,
+                scss: generateLoaders('scss', 'sass').extract,
+                stylus: generateLoaders('stylus', 'stylus').extract,
+                styl: generateLoaders('styl', 'stylus').extract
+            },
+            loaders: {
+                css: generateLoaders('css').loaders,
+                postcss: generateLoaders('postcss').loaders,
+                less: generateLoaders('less', 'less').loaders,
+                sass: generateLoaders('sass', 'sass', { indentedSyntax: true }).loaders,
+                scss: generateLoaders('scss', 'sass').loaders,
+                stylus: generateLoaders('stylus', 'stylus').loaders,
+                styl: generateLoaders('styl', 'stylus').loaders
+            }
+        }
+    } else {
+        return {
+            loaders: {
+                css: generateLoaders('css').loaders,
+                postcss: generateLoaders('postcss').loaders,
+                less: generateLoaders('less', 'less').loaders,
+                sass: generateLoaders('sass', 'sass', { indentedSyntax: true }).loaders,
+                scss: generateLoaders('scss', 'sass').loaders,
+                stylus: generateLoaders('stylus', 'stylus').loaders,
+                styl: generateLoaders('styl', 'stylus').loaders
+            }
+        }
     }
 }
 
 // Generate loaders for standalone style files (outside of .vue)
 exports.styleLoaders = function(options) {
     const output = []
-    const loaders = exports.cssLoaders(options)
 
-    for (const extension in loaders) {
-        const loader = loaders[extension]
-        output.push({
-            test: new RegExp('\\.' + extension + '$'),
-            use: 'happypack/loader?id=happycss' + extension
-        })
+    if (options.extract) {
+        const loaders = exports.cssLoaders(options).extract
+
+        for (const extension in loaders) {
+            const loader = loaders[extension]
+            output.push({
+                test: new RegExp('\\.' + extension + '$'),
+                use: loader
+            })
+        }
+
+    } else {
+        const loaders = exports.cssLoaders(options).loaders
+
+        for (const extension in loaders) {
+            output.push({
+                test: new RegExp('\\.' + extension + '$'),
+                use: 'happypack/loader?id=happycss' + extension
+            })
+        }
+
     }
 
     return output
@@ -97,7 +141,7 @@ exports.styleLoaders = function(options) {
 
 exports.happypack = function(options) {
     const happy = []
-    const loaders = exports.cssLoaders(options)
+    const loaders = exports.cssLoaders(options).loaders
 
     for (const extension in loaders) {
         const loader = loaders[extension]

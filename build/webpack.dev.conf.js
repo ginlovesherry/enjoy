@@ -13,7 +13,10 @@ const bundleConfig = require('../json/bundle-conf.json')
 
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
-const cssOptions = { sourceMap: config.dev.cssSourceMap, usePostCSS: true }
+const cssOptions = {
+    sourceMap: config.dev.cssSourceMap,
+    usePostCSS: true
+}
 
 const devWebpackConfig = merge(baseWebpackConfig, {
     module: {
