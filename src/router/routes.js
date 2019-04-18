@@ -1,12 +1,7 @@
 import moduleRouter from './modules'
-const otherRouter = [
-  {
+const otherRouter = [{
     path: '*',
-    redirect: '/404',
-    meta: {
-      auth: false
-    }
-  }
-]
+    redirect: '/404'
+}]
 var allModules = moduleRouter.concat(otherRouter)
 export const routes = allModules
