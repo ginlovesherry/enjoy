@@ -3,6 +3,7 @@ import 'nprogress/nprogress.css' // Progress 进度条样式
 
 const beforeEach = (to, from, next) => {
     NProgress.start()
+    next()
 }
 const afterEach = (to, from) => {
     NProgress.done()
