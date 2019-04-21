@@ -20,7 +20,7 @@
 <script>
     import img404 from '@assets/images/404.png'
     import img404cloud from '@assets/images/404_cloud.png'
-    import HelloWorld from '@components/HelloWorld/HelloWorld'
+    import CPS from '@components/'
 
     export default {
         data() {
@@ -35,7 +35,7 @@
             }
         },
         components: {
-            HelloWorld
+            HelloWorld: CPS.HelloWorld
         }
     }
 
