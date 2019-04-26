@@ -7,26 +7,27 @@
                 <img class="pic-404__child mid" :src="img404cloud" alt="404">
                 <img class="pic-404__child right" :src="img404cloud" alt="404">
             </div>
-            <div class="bullshit">
-                <div class="bullshit__oops">OOPS!</div>
-                <div class="bullshit__headline">{{ message }}</div>
-                <div class="bullshit__info">请检查您输入的网址是否正确，请点击以下按钮返回主页或者发送错误报告</div>
-                <a href="/" class="bullshit__return-home">返回首页</a>
+                <div class="bullshit">
+                    <div class="bullshit__oops">OOPS!</div>
+                    <div class="bullshit__headline">{{ message }}</div>
+                    <div class="bullshit__info">请检查您输入的网址是否正确，请点击以下按钮返回主页或者发送错误报告</div>
+                    <a :href="[homeHref]" class="bullshit__return-home">返回首页</a>
+                </div>
             </div>
+            <HelloWorld></HelloWorld>
         </div>
-        <HelloWorld></HelloWorld>
-    </div>
 </template>
 <script>
     import img404 from '@assets/images/404.png'
     import img404cloud from '@assets/images/404_cloud.png'
-    import CPS from '@components/'
+    import CPS from '@components'
 
     export default {
         data() {
             return {
                 img404,
-                img404cloud
+                img404cloud,
+                homeHref: this.$codes.indexPath
             }
         },
         computed: {

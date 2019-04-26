@@ -15,7 +15,7 @@ export const link = route => {
     return router.push(route)
 }
 
-//#region 辅助方法
+// #region 辅助方法
 
 export function getDownloadUrl(imgUrl) {
     if (imgUrl || imgUrl.indexOf('http') === 0 || imgUrl.indexOf('//') === 0) {
@@ -23,7 +23,7 @@ export function getDownloadUrl(imgUrl) {
     }
     return config.previwFileUrl + imgUrl
 }
-//#endregion
+// #endregion
 
 /**
  * 动态加载JS

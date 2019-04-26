@@ -54,6 +54,8 @@ module.exports = {
         'space-before-function-paren': [0, 'always'], //函数定义时括号前面要不要有空格
         'no-console': 0, // 禁止使用console
         'no-unused-expressions': 0, //禁止无用的表达式
+        'quotes': [1, "single"], //引号类型 `` "" ''
+        'spaced-comment': 0, //注释风格要不要有空格
     },
     "overrides": [{
         "files": ["*.vue"],

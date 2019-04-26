@@ -7,7 +7,7 @@ const instance = axios.create({
     timeout: 10000 // 请求超时时间
     // transformRequest: data => qs.stringify(data)
 })
-//配置发送请求的信息
+// 配置发送请求的信息
 instance.interceptors.request.use(
     e => {
         e.method = _config.isMockTest ? 'GET' : e.method
@@ -18,7 +18,7 @@ instance.interceptors.request.use(
     },
     error => ({ status: 0, msg: error.message })
 )
-//配置请求回来的信息
+// 配置请求回来的信息
 instance.interceptors.response.use(
     response => {
         const resp = response.data

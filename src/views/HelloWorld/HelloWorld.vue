@@ -32,7 +32,7 @@
                 <a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a>
             </li>
             <li>
-                <a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a>
+                <a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue{{arr}}</a>
             </li>
         </ul>
     </div>
@@ -43,6 +43,18 @@
         data() {
             return {
                 msg: 'Welcome to Your Vue.js App'
+            }
+        },
+        mounted() {
+            this.fetchData()
+        },
+        methods: {
+            fetchData() {
+                this.$http.newsList.follow().then(function(res) {
+                    console.log(res);
+                }).catch(function(err) {
+                    console.log(err);
+                });
             }
         }
     }

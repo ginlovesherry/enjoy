@@ -18,7 +18,7 @@ import {
     Slider
 } from 'vant'
 
-export {
+export default {
     Button,
     Cell,
     CellGroup,

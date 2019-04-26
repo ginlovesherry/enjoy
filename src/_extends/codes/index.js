@@ -1,1 +1,1 @@
-export const index_path = '/'
+export const indexPath = '/'
