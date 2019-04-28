@@ -18,8 +18,8 @@
         </div>
 </template>
 <script>
-    import img404 from '@assets/images/404.png'
-    import img404cloud from '@assets/images/404_cloud.png'
+    import img404 from '@assets/image/404.png'
+    import img404cloud from '@assets/image/404_cloud.png'
     import CPS from '@components'
 
     export default {

@@ -10,7 +10,7 @@ const instance = axios.create({
 // 配置发送请求的信息
 instance.interceptors.request.use(
     e => {
-        e.method = _config.isMockTest ? 'GET' : e.method
+        e.method = e.method === 'post' ? 'post' : 'get'
         e.url = _config.suffix ? e.url + _config.suffix : e.url
         e.params = e.params || {}
         e.headers = e.headers || {}

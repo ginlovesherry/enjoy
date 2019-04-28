@@ -1,7 +1,9 @@
 import {
-    normalTime
+    normalTime,
+    formatTime
 } from './timeFormat';
 
 export default {
-    normalTime
+    normalTime,
+    formatTime
 }

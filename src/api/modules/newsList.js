@@ -14,3 +14,11 @@ export function follow() {
         method: 'get',
     })
 }
+
+export function getColumns(params) {
+    return request({
+        url: '/app_if/getColumns',
+        method: 'get',
+        params: params
+    })
+}

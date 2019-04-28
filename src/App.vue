@@ -1,24 +1,28 @@
 <template>
     <div id="app">
-        <img src="./assets/logo.png">
-        <router-view />
+        <layout>
+            <transition name="fade-in" mode="out-in" appear>
+                <router-view :key="routerKey" />
+            </transition>
+        </layout>
     </div>
 </template>
 <script>
+    import Layout from '@/layout';
+
     export default {
-        name: 'App'
-    }
+        name: 'App',
+        components: {
+            Layout
+        },
+        computed: {
+            routerKey() {
+                return this.$route.fullPath && this.$route.fullPath.split('?')[0];
+                // return this.$route.fullPath;
+            }
+        }
+    };
 
 </script>
-<style>
-    #app {
-        font-family: 'Avenir', Helvetica, Arial, sans-serif;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        text-align: center;
-        color: #2c3e50;
-        margin-top: 60px;
-        box-sizing: border-box;
-    }
-
+<style lang="sass" scoped>
 </style>

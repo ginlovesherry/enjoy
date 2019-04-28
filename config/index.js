@@ -19,14 +19,14 @@ module.exports = {
         assetsSubDirectory: 'static',
         assetsPublicPath: '/',
         proxyTable: {
-            '/api': {
-                target: 'https://www.easy-mock.com/mock/5c7fb3fc6498b753ed1f9cd2',//目标接口域名
-                secure: true, // 如果是https接口，需要配置这个参数
+            '/app_if': {
+                // target: 'https://www.easy-mock.com/mock/5c7fb3fc6498b753ed1f9cd2',//目标接口域名
+                target: 'http://172.19.57.193:8081',//目标接口域名
+                secure: false, // 如果是https接口，需要配置这个参数
                 changeOrigin: true,//是否跨域
                 pathRewrite: {
-                    // '^/api': ''
+                    '^/app_if': '/app_if'
                 }
-                //重写路径，其实这里就是和上面的target拼接起来
             }
         },
         // Various Dev Server settings

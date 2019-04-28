@@ -1,0 +1,55 @@
+/* mixin for multiline */
+@mixin multiLineEllipsis($lineHeight: 1.2em, $lineCount: 1, $bgColor: white)
+    overflow: hidden
+    position: relative
+    line-height: $lineHeight
+    max-height: $lineHeight * $lineCount
+    text-align: justify
+    // margin-right: -1em
+    // padding-right: 1em
+    &:before
+        content: '...'
+        width: 1em
+        position: absolute
+        right: 0
+        bottom: 0
+        background-color: $bgColor
+    &:after
+        content: ''
+        position: absolute
+        right: 0
+        width: 1em
+        height: 1em
+        margin-top: 0.5em
+        background: $bgColor
+
+$html-font-size: 75px
+@mixin px2rem($property, $values...)
+    $max: length($values)
+    $remValues: ()
+    $html-font-size: strip-units($html-font-size)
+
+    @for $i from 1 through $max
+        $value: nth($values, $i)
+        @if not unitless($value)
+            $value: strip-units(nth($values, $i))
+
+        // value * 2 / 75
+        $remValue: #{$value / $html-font-size}rem
+        @if $i <= $max
+            $remValues: append($remValues, join((), $remValue))
+
+    #{$property}: join((), $remValues)
+
+@function strip-units($number)
+    @return $number / ($number * 0 + 1)
+
+@mixin box-sizing($val)
+    box-sizing: $val
+
+@mixin ellipsis($lineCount: 2)
+    overflow: hidden
+    text-overflow: ellipsis
+    display: -webkit-box
+    -webkit-line-clamp: $lineCount
+    -webkit-box-orient: vertical
