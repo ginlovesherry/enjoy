@@ -76,7 +76,7 @@
                 let bannerList = [];
                 let artList = [];
                 let n = 0;
-                console.log(',,,', columns, columns.length, columns[active])
+                // console.log(',,,', columns, columns.length, columns[active])
                 if (columns && !columns.length && !columns[active]) {
                     return {
                         bannerList: [],
@@ -101,7 +101,6 @@
                         }
                     });
                 }
-                console.log(artList, 22);
                 return {
                     bannerList,
                     artList

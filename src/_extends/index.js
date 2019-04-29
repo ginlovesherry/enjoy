@@ -1,3 +1,4 @@
+import 'lib-flexible'
 import 'normalize.css'
 import '@assets/styles/border.css'
 import '@assets/styles/common.sass'
@@ -11,7 +12,6 @@ import $ui from './ui'
 import axios from '@api'
 import VueAxios from 'vue-axios'
 import vConsole from 'vconsole'
-import 'lib-flexible'
 
 const register = function(_vue) {
     // Object.keys(vants).forEach((e) => { _vue.use(e, vants[e]) })

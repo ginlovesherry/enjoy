@@ -22,7 +22,7 @@
      * @author shenjp@founder.com
      * @date 2019-04-24 16:00:03
      */
-    import Util from '@/assets/js/util';
+    import Util from '@/assets/js/util'
     export default {
         name: 'recommend-comp',
         props: {
@@ -52,6 +52,7 @@
 
 </script>
 <style lang="sass" scoped>
+    @import '@assets/styles/mixin.sass'
     .recommend-comp
         border-bottom: 1px solid #eee
         padding: 40px 0px
@@ -68,7 +69,7 @@
             .title
                 height: 80px
                 line-height: 40px
-                // @include ellipsis($lineCount: 2)
+                @include ellipsis($lineCount: 2)
                 font-size: 28px
         .home-special-cont-text
             span

@@ -79,15 +79,7 @@ exports.cssLoaders = function(options) {
                 css: generateLoaders('css').extract,
                 postcss: generateLoaders('postcss').extract,
                 less: generateLoaders('less', 'less').extract,
-                sass: generateLoaders('sass', 'sass', { indentedSyntax: true }).extract.concat({
-                    loader: 'sass-resources-loader',
-                    options: {
-                        resources: [
-                            path.resolve(__dirname, '../src/assets/style/mixin.sass'),
-                            path.resolve(__dirname, '../src/assets/style/vars.sass')
-                        ]
-                    }
-                }),
+                sass: generateLoaders('sass', 'sass', { indentedSyntax: true }).extract,
                 scss: generateLoaders('scss', 'sass').extract,
                 stylus: generateLoaders('stylus', 'stylus').extract,
                 styl: generateLoaders('styl', 'stylus').extract

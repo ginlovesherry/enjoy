@@ -68,6 +68,7 @@
 
 </script>
 <style lang="sass" scoped>
+    @import '@assets/styles/mixin.sass'
     .special-list
         border-bottom: 1px solid #eee
         padding: 40px 0px
@@ -114,7 +115,7 @@
             .mul-pic-foot-text
                 margin-top: 20px
         .title
-            // @include ellipsis($lineCount: 2)
+            @include ellipsis($lineCount: 2)
             font-size: 28px
 
 </style>
