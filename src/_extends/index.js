@@ -3,7 +3,7 @@ import 'normalize.css'
 import '@assets/styles/border.css'
 import '@assets/styles/common.sass'
 import '@assets/styles/icon.sass'
-import * as vants from './vants'
+import { Button, Tab, Tabs, Swipe, SwipeItem } from 'vant'
 import directives from '@directives'
 import components from '@components'
 import filters from '@filters'
@@ -13,11 +13,10 @@ import axios from '@api'
 import VueAxios from 'vue-axios'
 import vConsole from 'vconsole'
 
+const vants = { Button, Tab, Tabs, Swipe, SwipeItem }
+
 const register = function(_vue) {
-    // Object.keys(vants).forEach((e) => { _vue.use(e, vants[e]) })
-    Object.keys(vants).forEach((name) => {
-        _vue.component(`Van${name}`, vants[name]);
-    })
+    Object.keys(vants).forEach(e => { _vue.use(vants[e]) })
     // 注册全局指令，过滤器，组件
     Object.keys(directives).forEach(e => _vue.directive(e, directives[e]))
     Object.keys(filters).forEach(e => _vue.filter(e, filters[e]))

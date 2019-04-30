@@ -63,7 +63,7 @@
                 active
             } = this.$route.query;
             this.active = Number(active || 0);
-            this.$http.baseUrl.getColumns(params);
+            this.getColumns(params);
         }
     };
 
@@ -102,6 +102,8 @@
                 width: 300px
                 line-height: 66px
                 border-radius: 6px
+                font-size: 30px
+                font-weight: bolder
                 &.login-btn
                     color: #fc9105
                     border: 1px solid #e60013

@@ -7,7 +7,6 @@ const vueLoaderConfig = require('./vue-loader.conf')
 const HappyPack = require('happypack')
 const os = require('os')
 const happyThreadPool = HappyPack.ThreadPool({size: os.cpus().length})
-
 function resolve(dir) {
     return path.join(__dirname, '..', dir)
 }

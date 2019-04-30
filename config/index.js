@@ -21,7 +21,8 @@ module.exports = {
         proxyTable: {
             '/app_if': {
                 // target: 'https://www.easy-mock.com/mock/5c7fb3fc6498b753ed1f9cd2',//目标接口域名
-                target: 'http://172.19.57.193:8081',//目标接口域名
+                // target: 'http://172.19.57.193:8081',//目标接口域名
+                target: 'http://172.19.57.199:8088',//目标接口域名
                 secure: false, // 如果是https接口，需要配置这个参数
                 changeOrigin: true,//是否跨域
                 pathRewrite: {
