@@ -1,5 +1,5 @@
 export default {
-    apiBaseUrl: '',
+    apiBaseUrl: './',
     previwFileUrl: '',
     suffix: ''
 }
